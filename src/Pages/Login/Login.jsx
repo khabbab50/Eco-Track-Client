@@ -94,7 +94,7 @@ const Login = () => {
 
         <div className="px-5 pb-4 flex md:flex-col flex-col sm:items-center sm:justify-between gap-3">
           <Link
-            to={"/forgetpassword"}
+            to={"/forgot-password"}
             className="text-sm text-[#0B5E06] font-semibold hover:underline self-end sm:self-auto"
           >
             Forget Password?

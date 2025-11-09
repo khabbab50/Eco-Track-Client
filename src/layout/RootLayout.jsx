@@ -5,7 +5,10 @@ import Header from "../components/Header";
 const RootLayout = () => {
   return (
     <div>
-      <Header />
+      <div className="border-b">
+        <Header />
+      </div>
+
       <Outlet />
       <Footer />
     </div>

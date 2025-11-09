@@ -6,10 +6,10 @@ import {
   signInWithPopup,
   signOut,
   updateProfile,
-} from 'firebase/auth';
-import { createContext, useEffect, useState } from 'react';
-import { auth } from '../Firebase/firebase.config';
-import { toast } from 'react-toastify';
+} from "firebase/auth";
+import { createContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { auth } from "../Firebase/firebase.config";
 
 export const AuthContext = createContext(null);
 
@@ -18,12 +18,12 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   // Register from
   const createUserPass = (email, password) => {
-    setLoading(true)
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
   // Sign in with email password
   const signInWithEmailPass = (email, password) => {
-    setLoading(true)
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -31,17 +31,17 @@ const AuthProvider = ({ children }) => {
   const handleSignOut = () => {
     return signOut(auth)
       .then((res) => {
-        toast.success('Signout Succesfull');
+        toast.success("Signout Succesfull");
       })
       .catch((err) => {
         console.error(err);
-        toast.error('e.message');
+        toast.error("e.message");
       });
   };
 
   // Sign in with google
   const signinWithGoogle = (provider) => {
-    setLoading(true)
+    setLoading(true);
     return signInWithPopup(auth, provider);
   };
 
@@ -55,7 +55,7 @@ const AuthProvider = ({ children }) => {
         displayName: name,
         photoURL: photoURL,
       });
-      toast.success('successfully');
+      toast.success("successfully");
     } catch (error) {
       toast.error(error.message);
     } finally {
@@ -64,18 +64,14 @@ const AuthProvider = ({ children }) => {
   };
 
   // forget password
-  const forgetPassword = (email)=>{
-    return sendPasswordResetEmail(auth, email)
-  }
+  const forgetPassword = (email) => {
+    return sendPasswordResetEmail(auth, email);
+  };
 
   // Authon state change
   useEffect(() => {
-    const sunSubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(null);
-      }
+    const sunSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
       setLoading(false);
     });
     return () => sunSubscribe();
@@ -94,7 +90,11 @@ const AuthProvider = ({ children }) => {
     setLoading,
   };
 
-  return <AuthContext.Provider value={authInformation}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={authInformation}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;
