@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router";
 import RootLayout from "../layout/RootLayout";
 import ChallengeDetail from "../Pages/ChallengeDetail/ChallengeDetail";
 import Challenges from "../Pages/Challenges/Challenges";
+import Error404 from "../Pages/Error/Error404";
 import ForgotPassword from "../Pages/ForgotPassword/ForgotPassword";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
@@ -11,6 +12,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
+    errorElement: <Error404 />,
     children: [
       {
         index: true,
